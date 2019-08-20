@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
@@ -12,6 +13,7 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
 
         String inputString;
+        ArrayList<String> storeStrings = new ArrayList<String>();
         boolean shutdown = false;
         while (!shutdown) {
             inputString = scanner.nextLine();
@@ -19,10 +21,14 @@ public class Duke {
                 shutdown = true;
                 System.out.println("Bye. Hope to see you again soon!");
                 
+            } else if (inputString.equals("list")) {
+                for (int i = 1; i <= storeStrings.size(); ++i) {
+                    System.out.println(i + ". " + inputString);
+                }
             } else {
-                System.out.println(inputString);
+                storeStrings.add(inputString);
+                System.out.println("added: " + inputString);
             }
         }
     }
-
 }
