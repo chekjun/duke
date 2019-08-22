@@ -1,5 +1,7 @@
 import java.util.Scanner;
+import java.io.PrintStream;
 import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 
 public class Duke {
     public static void main(String[] args) {
@@ -11,21 +13,19 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         Scanner scanner = new Scanner(System.in);
-
-        System.out.println("✓");
-
+        PrintStream printer = new PrintStream(System.out, true, StandardCharsets.UTF_8);
         String inputString;
-        ArrayList<Task> taskList = new ArrayList<Task>();
+        ArrayList<Task> taskList= new ArrayList<Task>();
         boolean shutdown = false;
         while (!shutdown) {
             inputString = scanner.nextLine();
             if (inputString.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
                 shutdown = true;
+                System.out.println("Bye. Hope to see you again soon!");
             } else if (inputString.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 1; i <= taskList.size(); ++i) {
-                    System.out.println(i + ". ["
+                    printer.println(i + ". ["
                         + taskList.get(i - 1).getStatusIcon()
                         + "] "
                         + taskList.get(i - 1).description);
@@ -35,10 +35,9 @@ public class Duke {
                 int doneNum = Integer.parseInt(inputString.substring(5));
                 Task t = taskList.get(doneNum - 1);
                 t.isDone = true;
-                System.out.println("[\u2713] " + t.description);
+                printer.println("[\u2713] " + t.description);
             } else {
-                Task t = new Task(inputString);
-                taskList.add(t);
+                taskList.add(new Task(inputString));
                 System.out.println("added: " + inputString);
             }
         }
