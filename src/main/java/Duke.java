@@ -19,19 +19,22 @@ public class Duke {
             } else if (inputString.length() > 5 && inputString.substring(0, 4).equals("done")) {
                 taskManager.doneTask(Integer.parseInt(inputString.substring(5)));
             } else {
-                Task t = new Task(inputString);
-                taskManager.addTask(t);
-                /*
                 if (inputString.length() > 5 && inputString.substring(0, 4).equals("todo")) {
-                    
+                    ToDos T = new ToDos(inputString.substring(5));
+                    taskManager.addTask(T);
                 } else if (inputString.length() > 9 && inputString.substring(0, 8).equals("deadline")) {
-                    
+                    int descriptionEndIndex = inputString.indexOf("/");
+                    String description = inputString.substring(9, descriptionEndIndex - 1);
+                    String by = inputString.substring(descriptionEndIndex + 4);
+                    Deadlines D = new Deadlines(description, by);
+                    taskManager.addTask(D);
                 } else if (inputString.length() > 6 && inputString.substring(0, 5).equals("event")) {
-                    
-                } else {
-
+                    int descriptionEndIndex = inputString.indexOf("/");
+                    String description = inputString.substring(6, descriptionEndIndex - 1);
+                    String at = inputString.substring(descriptionEndIndex + 4);
+                    Events E = new Events(description, at);
+                    taskManager.addTask(E);
                 }
-                */
             }
         }
     }

@@ -29,7 +29,11 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
+    }
+
+    public String toString() {
+        return getStatusIcon() + description;
     }
     
     /**

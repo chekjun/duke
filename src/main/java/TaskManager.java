@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class TaskManager {
     private PrintStream printer = new PrintStream(System.out, true, StandardCharsets.UTF_8);
+    private int numTasks = 0;
     private ArrayList<Task> taskList;
 
     public TaskManager() {
@@ -15,8 +16,7 @@ public class TaskManager {
         + Format.indent + " Here are the tasks in your list:");
         for (int i = 1; i <= taskList.size(); ++i) {
             printer.println(Format.indent + " "
-                + i + ". [" + taskList.get(i - 1).getStatusIcon() + "] "
-                + taskList.get(i - 1).getDescription());
+                + i + "." + taskList.get(i - 1).toString());
         }
         printer.println(Format.divider + "\n");
     }
@@ -24,16 +24,21 @@ public class TaskManager {
     public void doneTask(int i) {
         Task t = taskList.get(i - 1);
         t.setDone(true);
+        --numTasks;
         printer.println(Format.divider
             + Format.indent + " Nice! I've marked this task as done:\n"
-            + Format.indent + "   [" + t.getStatusIcon() + "] " + t.getDescription() + "\n"
+            + Format.indent + t.toString() + "\n"
+            + Format.indent + " Now you have " + numTasks + " tasks in the list.\n"
             + Format.divider);
     }
 
     public void addTask(Task t) {
         taskList.add(t);
+        ++numTasks;
         printer.println(Format.divider
-        + Format.indent + " added: " + t.getDescription() + "\n"
+        + Format.indent + " Got it. I've added this task:\n  "
+        + Format.indent + t.toString() + "\n"
+        + Format.indent + " Now you have " + numTasks + " tasks in the list.\n"
         + Format.divider);
     }
 }
