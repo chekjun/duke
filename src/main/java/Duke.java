@@ -1,44 +1,37 @@
 import java.util.Scanner;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.nio.charset.StandardCharsets;
 
 public class Duke {
     public static void main(String[] args) {
-        String logo =
-                  " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        TaskManager taskManager = new TaskManager();
         Scanner scanner = new Scanner(System.in);
-        PrintStream printer = new PrintStream(System.out, true, StandardCharsets.UTF_8);
-        String inputString;
-        ArrayList<Task> taskList= new ArrayList<Task>();
         boolean shutdown = false;
+        String inputString;
+        
+        Response.printWelcome();
+
         while (!shutdown) {
             inputString = scanner.nextLine();
             if (inputString.equals("bye")) {
                 shutdown = true;
-                System.out.println("Bye. Hope to see you again soon!");
+                Response.printGoodbye();
             } else if (inputString.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 1; i <= taskList.size(); ++i) {
-                    printer.println(i + ". ["
-                        + taskList.get(i - 1).getStatusIcon()
-                        + "] "
-                        + taskList.get(i - 1).description);
-                }
-            } else if (inputString.length() > 4 && inputString.substring(0, 4).equals("done")) {
-                System.out.println("Nice! I've marked this task as done:");
-                int doneNum = Integer.parseInt(inputString.substring(5));
-                Task t = taskList.get(doneNum - 1);
-                t.isDone = true;
-                printer.println("[\u2713] " + t.description);
+                taskManager.listTasks();
+            } else if (inputString.length() > 5 && inputString.substring(0, 4).equals("done")) {
+                taskManager.doneTask(Integer.parseInt(inputString.substring(5)));
             } else {
-                taskList.add(new Task(inputString));
-                System.out.println("added: " + inputString);
+                Task t = new Task(inputString);
+                taskManager.addTask(t);
+                /*
+                if (inputString.length() > 5 && inputString.substring(0, 4).equals("todo")) {
+                    
+                } else if (inputString.length() > 9 && inputString.substring(0, 8).equals("deadline")) {
+                    
+                } else if (inputString.length() > 6 && inputString.substring(0, 5).equals("event")) {
+                    
+                } else {
+
+                }
+                */
             }
         }
     }
