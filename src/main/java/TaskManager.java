@@ -23,8 +23,10 @@ public class TaskManager {
 
     public void doneTask(int i) {
         Task t = taskList.get(i - 1);
-        t.setDone(true);
-        --numTasks;
+        if (!t.isDone()) {
+            t.setDone(true);
+            --numTasks;
+        }
         printer.println(Format.divider
             + Format.indent + " Nice! I've marked this task as done:\n"
             + Format.indent + t.toString() + "\n"
@@ -40,5 +42,12 @@ public class TaskManager {
         + Format.indent + t.toString() + "\n"
         + Format.indent + " Now you have " + numTasks + " tasks in the list.\n"
         + Format.divider);
+    }
+
+    /**
+     * @return the taskList
+     */
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 }
