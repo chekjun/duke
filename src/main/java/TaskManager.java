@@ -1,6 +1,7 @@
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.io.FileWriter;
 
 public class TaskManager {
     private PrintStream printer = new PrintStream(System.out, true, StandardCharsets.UTF_8);
@@ -32,6 +33,19 @@ public class TaskManager {
             + Format.indent + t.toString() + "\n"
             + Format.indent + " Now you have " + numTasks + " tasks in the list.\n"
             + Format.divider);
+    }
+    
+    public void deleteTask(int i) {
+        Task t = taskList.get(i - 1);
+        if (!t.isDone()) {
+            --numTasks;
+        }
+        printer.println(Format.divider
+            + Format.indent + " Noted. I've removed this task:\n"
+            + Format.indent + t.toString() + "\n"
+            + Format.indent + " Now you have " + numTasks + " tasks in the list.\n"
+            + Format.divider);
+        taskList.remove(i - 1);
     }
 
     public void addTask(Task t) {
