@@ -8,6 +8,7 @@ public class Duke {
     private static String splitString[];
 
     public static void main(String[] args) {
+<<<<<<< HEAD
         Response.printWelcome();        
         running = true;
         do {
@@ -96,6 +97,39 @@ public class Duke {
                     case EVENT:
                         addEvent();
                         break;
+=======
+        Response.printWelcome();
+        while (running) {
+            inputString = scanner.nextLine();
+            try {
+                if (inputString.equals("bye")) {
+                    running = false;
+                    scanner.close();
+                    Response.printGoodbye();
+                } else if (inputString.equals("list")) {
+                    taskManager.listTasks();
+                } else if (inputString.length() > 3 && inputString.substring(0, 4).equals("done")) {
+                    int doneNum = validateDoneInput();
+                    taskManager.doneTask(doneNum);
+                }  else if (inputString.length() > 5 && inputString.substring(0, 6).equals("delete")) {
+                    int deleteNum = validateDeleteInput();
+                    taskManager.deleteTask(deleteNum);
+                } else {
+                    if (inputString.length() > 3 && inputString.substring(0, 4).equals("todo")) {
+                        ToDos T = validateToDo();
+                        taskManager.addTask(T);
+                    } else if (inputString.length() > 7 && inputString.substring(0, 8).equals("deadline")) {
+                        Deadlines D = validateDeadlines();
+                        taskManager.addTask(D);
+                    } else if (inputString.length() > 4 && inputString.substring(0, 5).equals("event")) {
+                        Events E = validateEvents();
+                        taskManager.addTask(E);
+                    } else {
+                        System.out.println(Format.divider
+                            + Format.indent + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                            + Format.divider);
+                    }
+>>>>>>> bd2183692cbaaa5f9b46b7faf17e284781d2b56f
                 }
             } catch(DukeException dukeException) {
                 System.out.println(Format.divider
@@ -125,11 +159,39 @@ public class Duke {
         return true;
     }
 
+<<<<<<< HEAD
     private static void markDone() throws DukeException {
         if (isInteger(splitString[1], 10)) {
             int doneNum = Integer.parseInt(splitString[1]);
             if (doneNum >= 1 && doneNum <= taskManager.getTaskList().size()) {
                 taskManager.doneTask(doneNum);
+=======
+    static int validateDeleteInput() throws DukeException {
+        if (inputString.length() == 6) {
+            throw new DukeException("Please specify a task.\n");
+        } else if (inputString.length() == 7) {
+            if (inputString.charAt(4) == ' ') {
+                throw new DukeException("Please specify a task.\n");
+            } else {
+                throw new DukeException("Invalid input given.\n");
+            }
+        } else {
+            int deleteNum = Integer.parseInt(inputString.substring(7));
+            if (deleteNum < 1 || deleteNum > taskManager.getTaskList().size()) {
+                throw new DukeException("Task does not exist.\n");
+            } else {
+                return deleteNum;
+            }
+        }
+    }
+
+    static ToDos validateToDo() throws DukeException {
+        if (inputString.length() == 4) {
+            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+        } else if (inputString.length() == 5) {
+            if (inputString.charAt(4) == ' ') {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+>>>>>>> bd2183692cbaaa5f9b46b7faf17e284781d2b56f
             } else {
                 throw new DukeException("Task does not exist.\n");
             }
