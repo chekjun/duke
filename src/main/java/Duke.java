@@ -158,7 +158,6 @@ public class Duke {
     private static void addDeadline() throws DukeException {
         if (splitString[1].contains(" /by ")) {
             splitString = splitString[1].split(" /by ", 2);
-            int slashIndex = splitString[1].indexOf("/");
             if (splitString.length == 1) {
                 throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.\n");
             } else if (splitString.length == 2) {
