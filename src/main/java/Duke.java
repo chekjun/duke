@@ -6,7 +6,7 @@ public class Duke {
     private static TaskManager taskManager = new TaskManager();
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) throws DukeException {
+    public static void main(String[] args) {
         Response.printWelcome();
         while (running) {
             inputString = scanner.nextLine();
@@ -20,6 +20,9 @@ public class Duke {
                 } else if (inputString.length() > 3 && inputString.substring(0, 4).equals("done")) {
                     int doneNum = validateDoneInput();
                     taskManager.doneTask(doneNum);
+                }  else if (inputString.length() > 5 && inputString.substring(0, 6).equals("delete")) {
+                    int deleteNum = validateDeleteInput();
+                    taskManager.deleteTask(deleteNum);
                 } else {
                     if (inputString.length() > 3 && inputString.substring(0, 4).equals("todo")) {
                         ToDos T = validateToDo();
@@ -32,7 +35,7 @@ public class Duke {
                         taskManager.addTask(E);
                     } else {
                         System.out.println(Format.divider
-                            + Format.indent + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-("
+                            + Format.indent + " ☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
                             + Format.divider);
                     }
                 }
@@ -60,6 +63,25 @@ public class Duke {
                 throw new DukeException("Task does not exist.\n");
             } else {
                 return doneNum;
+            }
+        }
+    }
+
+    static int validateDeleteInput() throws DukeException {
+        if (inputString.length() == 6) {
+            throw new DukeException("Please specify a task.\n");
+        } else if (inputString.length() == 7) {
+            if (inputString.charAt(4) == ' ') {
+                throw new DukeException("Please specify a task.\n");
+            } else {
+                throw new DukeException("Invalid input given.\n");
+            }
+        } else {
+            int deleteNum = Integer.parseInt(inputString.substring(7));
+            if (deleteNum < 1 || deleteNum > taskManager.getTaskList().size()) {
+                throw new DukeException("Task does not exist.\n");
+            } else {
+                return deleteNum;
             }
         }
     }
