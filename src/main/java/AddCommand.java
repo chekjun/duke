@@ -50,18 +50,22 @@ class AddCommand implements Command {
     public Deadlines validateDeadline(String str) throws DukeException {
         String[] splitString = str.split(" /by ", 2);
         if (splitString.length == 1) {
-            throw new DukeException("The format of deadline should be DESCRIPTION /by D/M/Y\n");
+            throw new DukeException("The format of deadline should be DESCRIPTION /by dd/MM/yyyy\n");
         } else {
-            return new Deadlines(splitString[0], splitString[1]);
+            Deadlines D = new Deadlines(splitString[0], splitString[1]);
+            D.setParsedby(Parser.parseDate(splitString[1]));
+            return D;
         }
     }
 
     public Events validateEvent(String str) throws DukeException {
         String[] splitString = str.split(" /at ", 2);
         if (splitString.length == 1) {
-            throw new DukeException("The format of event should be DESCRIPTION /by D/M/Y\n");
+            throw new DukeException("The format of event should be DESCRIPTION /by dd/MM/yyyy\n");
         } else {
-            return new Events(splitString[0], splitString[1]);
+            Events E = new Events(splitString[0], splitString[1]);
+            E.setParsedAt(Parser.parseDate(splitString[1]));
+            return E;
         }
     }
 

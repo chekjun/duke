@@ -35,7 +35,7 @@ public class Duke {
                 try {
                     storage.writeToFile(tasks);
                 } catch (IOException e) {
-                    throw new DukeException("Command successfully executed but writeTpFo;e failed");
+                    throw new DukeException("Command successfully executed but writeToFile failed");
                 }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
