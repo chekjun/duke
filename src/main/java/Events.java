@@ -1,4 +1,4 @@
-public class Events extends Task {
+class Events extends Task {
     private String at;
 
     public Events(String description, String at) {
@@ -6,8 +6,12 @@ public class Events extends Task {
         this.at = at;
     }
 
+    public String getAt() {
+        return at;
+    }
+
     @Override
     public String toString() {
-        return " [E]" + super.toString() + " (by: " + at + ")";
+        return " [E]" + super.toString() + " (at: " + at + ")";
     }
 }

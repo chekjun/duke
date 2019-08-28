@@ -1,4 +1,7 @@
 public class Task {
+    private static final String TICK = "[\u2713] ";
+    private static final String CROSS = "[\u2718] ";
+
     private String description;
     private boolean isDone;
 
@@ -7,39 +10,23 @@ public class Task {
         this.isDone = false;
     }
 
-    /**
-     * @return the description
-     */
     public String getDescription() {
         return description;
     }
 
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * @return the isDone
-     */
     public boolean isDone() {
         return isDone;
     }
 
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
     public String getStatusIcon() {
-        return (isDone ? "[\u2713] " : "[\u2718] "); //return tick or X symbols
+        return (isDone ? TICK : CROSS);
     }
 
     public String toString() {
         return getStatusIcon() + description;
-    }
-    
-    /**
-     * @param isDone the isDone to set
-     */
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
     }
 }
