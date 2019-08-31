@@ -1,31 +1,36 @@
 todo
-deadline
-event
-todo TODO
+todo 
+todo SHOULDNOTSHOWUP
 todo TODO1
 todo TODO2
 todo TODO3
+deadline
+deadline 
+deadline /by 
 deadline DEADLINE1
 deadline DEADLINE1 /by
 deadline DEADLINE1 /by 29/5/1997 1200
 deadline DEADLINE2 /by 1/1/1000 0800
 deadline DEADLINE3 /by 31/12/2022 1800
+event
+event 
+event /at 
 event EVENT1
 event EVENT1 /at
 event EVENT1 /at 29/5/1997 1200
 event EVENT2 /at 1/1/1000 0800
 event EVENT3 /at 31/12/2022 1800
-list
 done
+done 
 done a
 done 0
-done 100
+done 1
 delete
+delete 
 delete a
 delete 0
-delete 100
-done 1
 delete 1
+list 
 list
 bye 
 bye

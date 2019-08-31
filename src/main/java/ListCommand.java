@@ -1,10 +1,10 @@
-class ListCommand implements Command {
+public class ListCommand implements Command {
     public ListCommand() {}
     
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showListTask();
-        taskList.listTask(ui);
-        ui.showNumTask(taskList);
+        tasks.listTask(ui);
+        ui.showNumTask(tasks);
     }
 
     public boolean isExit() {

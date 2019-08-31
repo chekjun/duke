@@ -26,19 +26,25 @@ public class TaskList {
     }
 
     public void doneTask(int i) {
-        Task t = taskList.get(i - 1);
-        if (!t.isDone()) {
-            t.setDone(true);
-        }
+        Task t = taskList.get(i);
+        t.markAsDone();
     }
 
     public void deleteTask(int i) {
-        taskList.remove(i - 1);
+        taskList.remove(i);
+    }
+
+    public void searchTask(Ui ui, String str) {
+        for (int i = 0; i < taskList.size(); ++i) {
+            if (taskList.get(i).getDescription().contains(str)) {
+                ui.printTask(i + 1, taskList.get(i));
+            }
+        }
     }
 
     public void listTask(Ui ui) {
-        for (int i = 1; i <= taskList.size(); ++i) {
-            ui.printTask(i, taskList.get(i - 1));
+        for (int i = 0; i < taskList.size(); ++i) {
+            ui.printTask(i + 1, taskList.get(i));
         }
     }
 

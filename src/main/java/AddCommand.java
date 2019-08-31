@@ -1,4 +1,4 @@
-class AddCommand implements Command {
+public class AddCommand implements Command {
     private CommandType commandType;
     private String commandDetail;
 
@@ -8,68 +8,65 @@ class AddCommand implements Command {
     }
 
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        switch(commandType) {
+        switch (commandType) {
             case TODO:
-                if (commandDetail.isBlank()) {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
-                } else {
-                    ToDos T = new ToDos(commandDetail);
-                    taskList.addTask(T);
-                    ui.showAddTask();
-                    ui.printTask(T);
-                    ui.showNumTask(taskList);
-                }
+                ToDo T = validateToDo(commandDetail);
+                taskList.addTask(T);
+                ui.showAddTask();
+                ui.printTask(T);
                 break;
             case DEADLINE:
-                if (commandDetail.isBlank()) {
-                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
-                } else {
-                    Deadlines D = validateDeadline(commandDetail);
-                    taskList.addTask(D);
-                    ui.showAddTask();
-                    ui.printTask(D);
-                    ui.showNumTask(taskList);
-                }
+                Deadline D = validateDeadline(commandDetail);
+                taskList.addTask(D);
+                ui.showAddTask();
+                ui.printTask(D);
                 break;
             case EVENT:
-                if (commandDetail.isBlank()) {
-                    throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.\n");
-                } else {
-                    Events E = validateEvent(commandDetail);
-                    taskList.addTask(E);
-                    ui.showAddTask();
-                    ui.printTask(E);
-                    ui.showNumTask(taskList);
-                }
+                Event E = validateEvent(commandDetail);
+                taskList.addTask(E);
+                ui.showAddTask();
+                ui.printTask(E);
                 break;
             default:
-                throw new DukeException("Something went wrong executing AddCommand!");
+                throw new DukeException("Something went wrong executing AddCommand!\n");
         }
+        ui.showNumTask(taskList);
     }
 
-    public Deadlines validateDeadline(String str) throws DukeException {
+    public ToDo validateToDo(String str) throws DukeException {
+        if (str.isBlank())
+            throw new DukeException("Todo cannot be empty!\n");
+        else
+            return new ToDo(str);
+    }
+    
+    public Deadline validateDeadline(String str) throws DukeException {
         String[] splitString = str.split(" /by ", 2);
+        if (splitString[0].isBlank()) {
+            throw new DukeException("Deadline cannot be empty.\n");
+        }
         if (splitString.length == 1) {
             throw new DukeException("The format of deadline should be DESCRIPTION /by dd/MM/yyyy\n");
-        } else {
-            Deadlines D = new Deadlines(splitString[0], splitString[1]);
-            D.setParsedby(Parser.parseDate(splitString[1]));
-            return D;
         }
+        Deadline D = new Deadline(splitString[0], splitString[1]);
+        D.setParsedBy(Parser.parseDateTime(splitString[1]));
+        return D;
     }
 
-    public Events validateEvent(String str) throws DukeException {
+    public Event validateEvent(String str) throws DukeException {
         String[] splitString = str.split(" /at ", 2);
+        if (splitString[0].isBlank()) {
+            throw new DukeException("Event cannot be empty.\n");
+        }
         if (splitString.length == 1) {
             throw new DukeException("The format of event should be DESCRIPTION /by dd/MM/yyyy\n");
-        } else {
-            Events E = new Events(splitString[0], splitString[1]);
-            E.setParsedAt(Parser.parseDate(splitString[1]));
-            return E;
         }
+        Event E = new Event(splitString[0], splitString[1]);
+        E.setParsedAt(Parser.parseDateTime(splitString[1]));
+        return E;
     }
 
     public boolean isExit() {
         return false;
     }
-}
+} 

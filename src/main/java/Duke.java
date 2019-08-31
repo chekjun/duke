@@ -35,7 +35,7 @@ public class Duke {
                 try {
                     storage.writeToFile(tasks);
                 } catch (IOException e) {
-                    throw new DukeException("Command successfully executed but writeToFile failed");
+                    System.out.println("Failed writing to file.");
                 }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -46,6 +46,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:/Users/Chek Jun/Google Drive/1920S1/CS2113T/duke/src/main/java/Tasks.txt").run();
+        new Duke("C:/Users/Chek Jun/Google Drive/1920S1/CS2113T/duke/data.txt").run();
     }
 }

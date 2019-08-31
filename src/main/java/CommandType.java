@@ -5,5 +5,6 @@ enum CommandType {
     DONE,
     DELETE,
     LIST,
+    FIND,
     EXIT
 }

@@ -1,8 +1,8 @@
-class ExitCommand implements Command {
+public class ExitCommand implements Command {
     public ExitCommand() {}
 
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showGoodbye();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.showExit();
     }
 
     public boolean isExit() {
