@@ -46,6 +46,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:/Users/Chek Jun/Google Drive/1920S1/CS2113T/duke/data.txt").run();
+        // Duke("C:/Users/Chek Jun/Google Drive/1920S1/CS2113T/duke/src/main/java/data.txt").run(); // desktop path
+        new Duke("C:/Users/Lim Chek Jun/Google Drive/1920S1/CS2113T/duke/text-ui-test/data.txt").run(); // laptop path
     }
 }
