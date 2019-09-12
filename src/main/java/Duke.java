@@ -1,12 +1,7 @@
 import java.io.IOException;
 
 public class Duke {
-    /*
-    * Ui: deals with interactions with the user
-    * Storage: deals with loading tasks from the file and saving tasks in the file
-    * Parser: deals with making sense of the user command
-    * TaskList: contains the task list e.g., it has operations to add/delete tasks in the list
-    */
+    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
