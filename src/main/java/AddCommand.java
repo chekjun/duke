@@ -7,6 +7,14 @@ public class AddCommand implements Command {
         this.commandDetail = commandDetail;
     }
 
+    /**
+     * Executes Add Command which is specifically to add tasks to taskList.
+     *
+     * @param taskList Contains an ArrayList to store all tasks.
+     * @param ui Class which contains response messages for user.
+     * @param storage Class which handles read, write from text file.
+     * @throws DukeException Used for errors that have been handled.
+     */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         switch (commandType) {
             case TODO:
