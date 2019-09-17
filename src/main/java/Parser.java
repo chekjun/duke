@@ -1,5 +1,11 @@
 public class Parser {
 
+    /**
+     *
+     * @param fullCommand Full input string given by user.
+     * @return Command type of command.
+     * @throws DukeException Used for errors that have been handled.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitString = fullCommand.split(" ", 2);
         CommandType commandType = checkCommand(splitString[0]);

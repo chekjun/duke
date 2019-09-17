@@ -12,6 +12,11 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     *
+     * @return tasks an ArrayList of tasks which is either loaded from the data file or an empty arraylist
+     * @throws DukeException Used for errors that have been handled. In this case it usually denotes failure to load file.
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {
